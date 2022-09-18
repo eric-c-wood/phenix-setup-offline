@@ -1,0 +1,16 @@
+[Unit]
+Description=Start miniweb
+Requires=minimega.service
+After=minimega.service
+PartOf=phenix-web.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/minimega
+ExecStart=/opt/minimega/bin/miniweb -console /opt/minimega/bin/minimega
+
+
+
+
+
+

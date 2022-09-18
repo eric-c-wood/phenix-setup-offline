@@ -1,0 +1,14 @@
+[Unit]
+Description=Start phenix web server
+Requires=minimega.service 
+After=minimega.service 
+Before=miniweb.service
+Wants=miniweb.service
+
+[Service]
+Type=simple
+Environment=PHENIX_STORE_ENDPOINT=bolt:///etc/phenix/store.bdb
+ExecStart=/opt/phenix/bin/phenix ui --log.error-stderr
+
+[Install]
+WantedBy=multi-user.target
