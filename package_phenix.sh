@@ -132,6 +132,8 @@ tar -cJv -f /opt/build/offline-node-modules.tar.xz $HOME/offline-node-modules
 rm -rf /opt/build/phenix-setup-offline
 rm -f /opt/build/go1.18.linux-amd64.tar.gz
 
+sudo tar -cJv -f /opt/build.tar.xz /opt/build
+
 
 
 
