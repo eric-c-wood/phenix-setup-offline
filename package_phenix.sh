@@ -21,11 +21,15 @@ wget https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protoc
 
 # install git
 echo "Installing git"
-sudo apt install git
+sudo apt -y install git
 
 # Clone the golang repository
 echo "Cloning Golang repository"
 git clone https://github.com/golang/go.git
+
+# Download go1.4 
+echo "Downloading go1.4"
+wget https://go.dev/dl/go1.4.linux-amd64.tar.gz
 
 # Clone the gvm repository 
 echo "Cloning gvm repository"
@@ -43,16 +47,58 @@ git clone https://github.com/sandia-minimega/minimega.git
 echo "Cloning phenix repository"
 git clone https://github.com/sandia-minimega/phenix.git
 
-# Download go1.4 
-echo "Downloading go1.4"
-wget https://go.dev/dl/go1.4.linux-amd64.tar.gz
+########### Setup yarn offline mirror ###############
+
+# Install google proto buffers
+echo "Installing Google proto buffers"
+PROTOC_ZIP=protoc-3.7.1-linux-x86_64.zip
+sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local bin/protoc
+sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local 'include/*'
+
+# Install nodejs 14.2
+sudo apt -y install curl
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+sudo apt -y install nodejs
+
+# Install yarn
+echo "Installing yarn"
+sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
+
+# Create the SASS_BINARY_PATH environment variable to download
+# the nodejs binding node
+echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
+source $HOME/.bashrc
+
+# Point yarn to offline mirror
+yarn config set yarn-offline-mirror $HOME/offline-node-modules
+yarn config set yarn-offline-mirror-pruning true
+mv $HOME/.yarnrc /opt/build/phenix/src/js
+
+# Install go1.18 for Phenix to obtain libraries for offline use
+wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf /opt/build/go1.18.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+
+# Create vendor directories and download the external libraries
+cd /opt/build/phenix/src/go;go mod vendor;
+
+# Build phenix which will acquire all the required libraries
+# for offline use
+sudo apt -y install make
+sudo chown -R $USER:$USER /opt/build/phenix
+cd /opt/build/phenix;make bin/phenix;
+
+############ End Offline Mirror Setup ###################
+
+# Modify the phenix/src/js Makefile for offline 
+sed -i 's/yarn install/yarn install --offline/g' phenix/src/js/Makefile
 
 # Modify nvm install to point to a local repository
 sed -i 's|https://github.com/${NVM_GITHUB_REPO}.git|/opt/build/nvm|g' nvm/install.sh
 
-# Download the SASS binding node 
-echo "Downloading SASS binding node"
-wget https://github.com/sass/node-sass/releases/download/v7.0.1/linux-x64-83_binding.node
+# Download the nodejs binding node 
+#echo "Downloading nodejs binding node"
+#wget https://github.com/sass/node-sass/releases/download/v7.0.1/linux-#x64-83_binding.node
 
 # Download redoc-cli 13.8 
 echo "Downloading redoc-cli 13.8"
@@ -60,19 +106,32 @@ wget https://registry.npmjs.org/redoc-cli/-/redoc-cli-0.13.8.tgz
 
 # Create the golang archive 
 echo "Creating the Golang archive"
-tar -cJv -f go.tar.xz go/
+tar -cJv -f /opt/build/go.tar.xz go/
 
 # Create the minimega archive 
 echo "Creating the minimega archive"
-tar -cJv -f minimega.tar.xz minimega/
+tar -cJv -f /opt/build/minimega.tar.xz minimega/
 
 # Create the phenix archive 
 echo "Creating the phenix archive"
-tar -cJv -f phenix.tar.xz phenix/
+tar -cJv -f /opt/build/phenix.tar.xz phenix/
 
 # Download the services 
 echo "Downloading the phenix and minimega services"
 git clone https://github.com/eric-c-wood/phenix-setup-offline.git
+mkdir -p services
+cp /opt/build/phenix-setup-offline/*.service services
+
+# Create the offline-node-modules archive
+echo "Creating offline-node-modules archive"
+tar -cJv -f /opt/build/offline-node-modules.tar.xz $HOME/offline-node-modules
+
+# Create the build archive
+
+# Remove files that are no longer needed
+rm -rf /opt/build/phenix-setup-offline
+rm -f /opt/build/go1.18.linux-amd64.tar.gz
+
 
 
 

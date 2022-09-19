@@ -26,9 +26,9 @@ gvm install go1.4 -B
 gvm use go1.4
 export GOROOT_BOOTSTRAP=$GOROOT
 
-#go 1.12 to build minimega, point to local go repository
-echo "Installing go 1.12"
-gvm install go1.12 -s=/opt/build/go
+#go 1.14 to build minimega, point to local go repository
+echo "Installing go 1.14"
+gvm install go1.14 -s=/opt/build/go
 
 #go 1.18 to build phenix, point to local go repository
 echo "Installing go 1.18"
@@ -59,7 +59,7 @@ source $HOME/.bashrc
 
 # Install yarn
 echo "Installing yarn"
-sudo dpkg -i /opt/build/yarn_1.22.17-1_all.deb
+sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
 
 # Setup the offline mirror
 tar -xJf /opt/build/offline-node-modules.tar.xz -C $HOME/
@@ -81,8 +81,8 @@ echo "Setting up minimega"
 sudo tar -xJf /opt/build/minimega.tar.xz -C /opt
 sudo cp /opt/build/services/mini*.service /opt/minimega
 sudo chown -R $USER:$USER /opt/minimega
-cd /opt/minimega;
-gvm use go1.12;
+cd /opt/minimega/scripts;
+gvm use go1.14;
 ./build.bash
 
 #setup phenix
@@ -92,7 +92,7 @@ sudo cp /opt/build/services/phenix*.service /opt/phenix
 sudo chown -R $USER:$USER /opt/phenix
 mv $HOME/.yarnrc /opt/phenix/src/js
 cd /opt/phenix;
-gvm use go1.17;
+gvm use go1.18;
 make bin/phenix
 
 #setup ovs bridge
