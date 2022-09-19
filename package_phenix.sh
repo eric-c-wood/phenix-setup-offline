@@ -119,8 +119,8 @@ tar -cJv -f /opt/build/phenix.tar.xz phenix/
 # Download the services 
 echo "Downloading the phenix and minimega services"
 git clone https://github.com/eric-c-wood/phenix-setup-offline.git
-mkdir -p services
-cp /opt/build/phenix-setup-offline/*.service services
+mkdir -p /opt/build/services
+cp /opt/build/phenix-setup-offline/*.service /opt/build/services
 
 # Create the offline-node-modules archive
 echo "Creating offline-node-modules archive"
