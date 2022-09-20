@@ -66,8 +66,7 @@ sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
 
 # Create the SASS_BINARY_PATH environment variable to download
 # the nodejs binding node
-echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
-source $HOME/.bashrc
+export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node
 
 # Point yarn to offline mirror
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
