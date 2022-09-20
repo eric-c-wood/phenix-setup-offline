@@ -2,6 +2,9 @@
 
 # Ubuntu 18.04 LTS Phenix Offline Package Creation
 # Make sure the system is in a clean state (i.e new OS install, or clear all caches 'yarn cache clean', 'npm cache clean', etc.)
+# Make sure the system date is correct
+sudo apt -y install ntpdate
+sudo ntpdate time.nist.gov
 
 # Create a package directory and switch into it
 echo "Creating package directory"
