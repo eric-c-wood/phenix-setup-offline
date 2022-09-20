@@ -139,6 +139,7 @@ rm -rf /opt/build/phenix
 rm -rf /opt/build/minimega
 rm -rf /opt/build/go
 
+cd /opt
 sudo tar -cJv -f /opt/build.tar.xz /opt/build
 
 
