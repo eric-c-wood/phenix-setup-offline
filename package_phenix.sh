@@ -87,14 +87,15 @@ cd /opt/build/phenix/src/go;go mod vendor;
 sudo apt -y install make
 sudo chown -R $USER:$USER /opt/build/phenix
 cd /opt/build/phenix;make bin/phenix;
+cd /opt/build
 
 ############ End Offline Mirror Setup ###################
 
 # Modify the phenix/src/js Makefile for offline 
-sed -i 's/yarn install/yarn install --offline/g' phenix/src/js/Makefile
+sed -i 's/yarn install/yarn install --offline/g' /opt/build/phenix/src/js/Makefile
 
 # Modify nvm install to point to a local repository
-sed -i 's|https://github.com/${NVM_GITHUB_REPO}.git|/opt/build/nvm|g' nvm/install.sh
+sed -i 's|https://github.com/${NVM_GITHUB_REPO}.git|/opt/build/nvm|g' /opt/build/nvm/install.sh
 
 # Download the nodejs binding node 
 #echo "Downloading nodejs binding node"
@@ -106,15 +107,18 @@ wget https://registry.npmjs.org/redoc-cli/-/redoc-cli-0.13.8.tgz
 
 # Create the golang archive 
 echo "Creating the Golang archive"
-tar -cJv -f /opt/build/go.tar.xz go/
+tar -cJv -f /opt/build/go.tar.xz /opt/build/go/
 
 # Create the minimega archive 
 echo "Creating the minimega archive"
-tar -cJv -f /opt/build/minimega.tar.xz minimega/
+tar -cJv -f /opt/build/minimega.tar.xz /opt/build/minimega/
 
 # Create the phenix archive 
 echo "Creating the phenix archive"
-tar -cJv -f /opt/build/phenix.tar.xz phenix/
+rm -rf /opt/build/phenix/src/js/dist
+rm -rf /opt/build/phenix/src/js/node_modules
+rm -rf /opt/build/phenix/bin
+tar -cJv -f /opt/build/phenix.tar.xz /opt/build/phenix/
 
 # Download the services 
 echo "Downloading the phenix and minimega services"
@@ -131,6 +135,9 @@ tar -cJv -f /opt/build/offline-node-modules.tar.xz $HOME/offline-node-modules
 # Remove files that are no longer needed
 rm -rf /opt/build/phenix-setup-offline
 rm -f /opt/build/go1.18.linux-amd64.tar.gz
+rm -rf /opt/build/phenix
+rm -rf /opt/build/minimega
+rm -rf /opt/build/go
 
 sudo tar -cJv -f /opt/build.tar.xz /opt/build
 
