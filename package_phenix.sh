@@ -87,6 +87,7 @@ cd /opt/build/phenix/src/go;go mod vendor;
 sudo apt -y install make
 sudo chown -R $USER:$USER /opt/build/phenix
 cd /opt/build/phenix;make bin/phenix;
+cd /opt/build
 
 ############ End Offline Mirror Setup ###################
 
