@@ -80,6 +80,7 @@ sudo chown -R $USER:$USER /phenix/images
 echo "Setting up minimega"
 sudo tar -xJf /opt/build/minimega.tar.xz -C /opt
 sudo cp /opt/build/services/mini*.service /opt/minimega
+sed -i /MM_CONTEXT=minimega/MM_CONTEXT=$(hostname -s)/ /opt/minimega/minimega.service
 sudo chown -R $USER:$USER /opt/minimega
 cd /opt/minimega/scripts;
 gvm use go1.14;
