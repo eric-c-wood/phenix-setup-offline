@@ -5,7 +5,7 @@
 
 # Create a package directory and switch into it
 echo "Creating package directory"
-sudo mkdir -p /opt/build;chown -R $USER:$USER;cd /opt/build
+sudo mkdir -p /opt/build;sudo chown -R $USER:$USER /opt/build;cd /opt/build
 
 # Download Nodejs 14.2
 echo "Downloading Nodejs 14.2"
