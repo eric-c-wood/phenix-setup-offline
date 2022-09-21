@@ -50,8 +50,9 @@ cp /opt/build/node-v14.2.0-linux-x64.tar.xz $HOME/.nvm/.cache/bin
 mkdir -p $HOME/.nvm/versions/node
 tar -xJf /opt/build/node-v14.2.0-linux-x64.tar.xz -C $HOME/.nvm/versions/node
 mv $HOME/.nvm/versions/node/node-v14.2.0-linux-x64 $HOME/.nvm/versions/node/v14.2.0
-tar -xJf /opt/build/redoc-cli-0.13.8.tar.xz -C $HOME/.nvm/versions/node/v14.2.0/lib/node_modules
-ln -s $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli/index.js $HOME/.nvm/versions/node/v14.2.0/bin/redoc-cli 
+mkdir -p $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli
+tar -xzf /opt/build/redoc-cli-0.13.8.tgz -C $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli
+ln -s $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli/package/index.js $HOME/.nvm/versions/node/v14.2.0/bin/redoc-cli 
 chmod +x $HOME/.nvm/versions/node/v14.2.0/bin/*
 echo "export PATH=$PATH:$HOME/.nvm/versions/node/v14.2.0/bin" >> $HOME/.bashrc
 echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
