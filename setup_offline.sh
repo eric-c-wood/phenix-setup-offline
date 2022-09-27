@@ -64,6 +64,7 @@ sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
 
 # Setup the offline mirror
 tar -xJf /opt/build/offline-node-modules.tar.xz -C $HOME/
+sudo chown -R $USER:$USER $HOME/offline-node-modules
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
 yarn config set yarn-offline-mirror-pruning true
 
@@ -92,7 +93,8 @@ echo "Setting up phenix"
 sudo tar -xJf /opt/build/phenix.tar.xz -C /opt
 sudo cp /opt/build/services/phenix*.service /opt/phenix
 sudo chown -R $USER:$USER /opt/phenix
-mv $HOME/.yarnrc /opt/phenix/src/js
+YARNRC=$(yarn config list --verbose | grep Found | grep -Po '["]([^"]+)["]' | head -n1 | sed s/\"//g)
+mv YARNRC /opt/phenix/src/js
 cd /opt/phenix;
 gvm use go1.18;
 make bin/phenix
