@@ -67,7 +67,6 @@ export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node
 # Point yarn to offline mirror
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
 yarn config set yarn-offline-mirror-pruning true
-mv $HOME/.yarnrc /opt/build/phenix/src/js
 
 # Install google proto buffers
 echo "Installing Google proto buffers"
