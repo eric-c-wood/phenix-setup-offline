@@ -50,9 +50,6 @@ cp /opt/build/node-v14.2.0-linux-x64.tar.xz $HOME/.nvm/.cache/bin
 mkdir -p $HOME/.nvm/versions/node
 tar -xJf /opt/build/node-v14.2.0-linux-x64.tar.xz -C $HOME/.nvm/versions/node
 mv $HOME/.nvm/versions/node/node-v14.2.0-linux-x64 $HOME/.nvm/versions/node/v14.2.0
-mkdir -p $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli
-tar -xzf /opt/build/redoc-cli-0.13.8.tgz -C $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli
-ln -s $HOME/.nvm/versions/node/v14.2.0/lib/node_modules/redoc-cli/package/index.js $HOME/.nvm/versions/node/v14.2.0/bin/redoc-cli 
 chmod +x $HOME/.nvm/versions/node/v14.2.0/bin/*
 echo "export PATH=$PATH:$HOME/.nvm/versions/node/v14.2.0/bin" >> $HOME/.bashrc
 echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
@@ -93,7 +90,7 @@ echo "Setting up phenix"
 sudo tar -xJf /opt/build/phenix.tar.xz -C /opt
 sudo cp /opt/build/services/phenix*.service /opt/phenix
 sudo chown -R $USER:$USER /opt/phenix
-YARNRC=$(yarn config list --verbose | grep Found | grep -Po '["]([^"]+)["]' | head -n1 | sed s/\"//g)
+YARNRC=$(yarn config list --verbose | grep Found | grep yarn | grep -Po '["]([^"]+)["]' | head -n1 | sed s/\"//g)
 mv YARNRC /opt/phenix/src/js
 cd /opt/phenix;
 gvm use go1.18;
