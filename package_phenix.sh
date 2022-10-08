@@ -135,6 +135,11 @@ rm -rf /opt/build/phenix
 rm -rf /opt/build/minimega
 rm -rf /opt/build/go
 
+# Remove redoc-cli artifacts
+rm -rf /opt/build/node_modules
+rm -f /opt/build/package.json
+rm -f /opt/build/yarn.lock
+
 sudo tar -cJv -f /opt/build.tar.xz -C /opt build
 
 
