@@ -91,7 +91,7 @@ sudo tar -xJf /opt/build/phenix.tar.xz -C /opt
 sudo cp /opt/build/services/phenix*.service /opt/phenix
 sudo chown -R $USER:$USER /opt/phenix
 YARNRC=$(yarn config list --verbose | grep Found | grep yarn | grep -Po '["]([^"]+)["]' | head -n1 | sed s/\"//g)
-mv YARNRC /opt/phenix/src/js
+mv $YARNRC /opt/phenix/src/js
 cd /opt/phenix;
 gvm use go1.18;
 make bin/phenix
