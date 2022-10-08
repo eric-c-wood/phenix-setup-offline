@@ -66,7 +66,7 @@ export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node
 
 # Point yarn to offline mirror
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
-yarn config set yarn-offline-mirror-pruning true
+yarn config set yarn-offline-mirror-pruning false
 
 # Install google proto buffers
 echo "Installing Google proto buffers"
@@ -79,18 +79,18 @@ wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf /opt/build/go1.18.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
+# Install redoc-cli.  It is not currently in package.json.
+echo "Downloading redoc-cli 0.13.8"
+yarn add redoc-cli@0.13.8
+
 # Build phenix which will acquire all the required libraries
 # for offline use
 sudo apt -y install make
 sudo chown -R $USER:$USER /opt/build/phenix
-cd /opt/build/phenix;make bin/phenix;
+cd /opt/build/phenix;make clean;make bin/phenix;
 
 # Create vendor directories and download the external libraries
 cd /opt/build/phenix/src/go;go mod vendor;
-
-# Install redoc-cli
-echo "Downloading redoc-cli 0.13.8"
-yarn add redoc-cli@0.13.8
 
 # Cleanup the directories
 cd /opt/build/phenix;make clean;
