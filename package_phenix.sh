@@ -88,6 +88,13 @@ cd /opt/build/phenix;make bin/phenix;
 # Create vendor directories and download the external libraries
 cd /opt/build/phenix/src/go;go mod vendor;
 
+# Install redoc-cli
+echo "Downloading redoc-cli 0.13.8"
+yarn add redoc-cli@0.13.8
+
+# Cleanup the directories
+cd /opt/build/phenix;make clean;
+
 cd /opt/build
 ############ End Offline Mirror Setup ###################
 
@@ -96,14 +103,6 @@ sed -i 's/yarn install/yarn install --offline/g' /opt/build/phenix/src/js/Makefi
 
 # Modify nvm install to point to a local repository
 sed -i 's|https://github.com/${NVM_GITHUB_REPO}.git|/opt/build/nvm|g' /opt/build/nvm/install.sh
-
-# Download the nodejs binding node 
-#echo "Downloading nodejs binding node"
-#wget https://github.com/sass/node-sass/releases/download/v7.0.1/linux-#x64-83_binding.node
-
-# Download redoc-cli 13.8 
-echo "Downloading redoc-cli 13.8"
-wget https://registry.npmjs.org/redoc-cli/-/redoc-cli-0.13.8.tgz
 
 # Create the golang archive 
 echo "Creating the Golang archive"
@@ -115,9 +114,6 @@ tar -cJv -f /opt/build/minimega.tar.xz -C /opt/build minimega
 
 # Create the phenix archive 
 echo "Creating the phenix archive"
-rm -rf /opt/build/phenix/src/js/dist
-rm -rf /opt/build/phenix/src/js/node_modules
-rm -rf /opt/build/phenix/bin
 tar -cJv -f /opt/build/phenix.tar.xz -C /opt/build phenix
 
 # Download the services 
