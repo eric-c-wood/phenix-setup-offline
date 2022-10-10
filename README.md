@@ -1,11 +1,15 @@
 ## phenix-offline package notes
 1) Install Ubuntu 18.04 LTS
-2) Download package_phenix.sh to $HOME
-3) Run `source $HOME/package_phenix.sh`
-4) After the package_phenix.sh script is finished running, there should be a 
+2) Navigate to the home directory on the Ubuntu 18.04 LTS (e.g. `cd ~`)
+3) Install git `sudo apt -y install git`
+4) Clone this repository `git clone https://github.com/eric-c-wood/phenix-setup-offline.git`
+5) Run `source $HOME/phenix-setup-offline/package_phenix.sh`
+6) After the package_phenix.sh script is finished running, there should be a 
 /opt/build.tar.xz compressed archive.  
-5) Burn the /opt/build.tar.xz archive and the setup_offline.sh files to a DVD
-6) To test, copy the build.tar.xz and setup_offline.sh files to $HOME on a clean Ubuntu 18.04 LTS
+7) Burn the /opt/build.tar.xz archive, the $HOME/phenix-setup-offline/*.sh and the $HOME/phenix-setup-offline/README.md files to a DVD
+8) To test, copy all files from the DVD to $HOME on a clean Ubuntu 18.04 LTS
 installation.  
-7) Run `source $HOME/setup_offline.sh`
+9) Run `cd $HOME;source setup_offline.sh`
 
+## phenix-offline update package notes
+1) To update from an existing installation, Run 'cd $HOME;source update_offline.sh` for step 9
