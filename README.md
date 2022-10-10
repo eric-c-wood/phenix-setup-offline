@@ -12,4 +12,4 @@ installation.
 9) Run `cd $HOME;source setup_offline.sh`
 
 ## phenix-offline update package notes
-1) To update from an existing installation, Run 'cd $HOME;source update_offline.sh` for step 9
+1) To update from an existing installation, Run `cd $HOME;source update_offline.sh` for step 9
