@@ -6,7 +6,7 @@
 5) Run `source $HOME/phenix-setup-offline/package_phenix.sh`
 6) After the package_phenix.sh script is finished running, there should be a 
 /opt/build.tar.xz compressed archive.  
-7) Burn the /opt/build.tar.xz archive, the $HOME/phenix-setup-offline/*.sh and the $HOME/phenix-setup-offline/README.md files to a DVD
+7) Burn the `/opt/build.tar.xz` archive, the `/opt/*.sh` and the `/opt/README.md` files to a DVD
 8) To test, copy all files from the DVD to $HOME on a clean Ubuntu 18.04 LTS
 installation.  
 9) Run `cd $HOME;source setup_offline.sh`

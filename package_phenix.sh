@@ -122,6 +122,10 @@ git clone https://github.com/eric-c-wood/phenix-setup-offline.git
 mkdir -p /opt/build/services
 cp /opt/build/phenix-setup-offline/*.service /opt/build/services
 
+# Copy the script files and README
+sudo cp /opt/build/phenix-setup-offline/*.sh /opt
+sudo cp /opt/build/phenix-setup-offline/*.md /opt
+
 # Create the offline-node-modules archive
 echo "Creating offline-node-modules archive"
 tar -cJv -f /opt/build/offline-node-modules.tar.xz -C $HOME offline-node-modules
