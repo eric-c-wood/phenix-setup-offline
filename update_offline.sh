@@ -3,7 +3,6 @@ echo "Stopping all services"
 sudo systemctl stop phenix-web
 
 echo "Deleting existing bridges"
-#setup ovs bridge
 sudo ovs-vsctl del-br mega_bridge
 sudo ovs-vsctl del-br phenix
 
@@ -27,6 +26,12 @@ sudo rm -rf $HOME/.nvm
 sudo rm -rf $HOME/.yarn
 sudo rm -rf $HOME/.cache/go-build
 sudo rm -rf $HOME/.cache/yarn
+
+# Restore the .bashrc file
+echo "Restoring .bashrc"
+rm -f $HOME/.bashrc
+sudo cp /etc/skel/.bashrc $HOME
+sudo chown $USER:$USER $HOME/.bashrc
 
 echo "Extracting /opt/build.tar.xz to /opt"
 sudo cp build.tar.xz /opt
