@@ -97,7 +97,7 @@ sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
 tar -xJf /opt/build/offline-node-modules.tar.xz -C $HOME/
 sudo chown -R $USER:$USER $HOME/offline-node-modules
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
-yarn config set yarn-offline-mirror-pruning false
+yarn config set yarn-offline-mirror-pruning true
 
 # Install google proto buffers
 echo "Installing Google proto buffers"
