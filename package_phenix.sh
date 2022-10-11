@@ -79,9 +79,9 @@ wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf /opt/build/go1.18.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
-# Install redoc-cli.  It is not currently in package.json.
-echo "Downloading redoc-cli 0.13.8"
-yarn add redoc-cli@0.13.8
+# Add redoc-cli to package.json so yarn can manage
+echo "Adding redoc-cli 0.13.8 to package.json"
+sed -i 's/"dependencies": {/& \n    "redoc-cli": "^0.13.8",/' /opt/build/phenix/src/js/package.json
 
 # Build phenix which will acquire all the required libraries
 # for offline use
@@ -138,11 +138,6 @@ rm -f /opt/build/go1.18.linux-amd64.tar.gz
 rm -rf /opt/build/phenix
 rm -rf /opt/build/minimega
 rm -rf /opt/build/go
-
-# Remove redoc-cli artifacts
-rm -rf /opt/build/node_modules
-rm -f /opt/build/package.json
-rm -f /opt/build/yarn.lock
 
 sudo tar -cJv -f /opt/build.tar.xz -C /opt build
 
