@@ -7,9 +7,9 @@ sudo ovs-vsctl del-br mega_bridge
 sudo ovs-vsctl del-br phenix
 
 echo "Disabling existing services"
-sudo systemctl disable /opt/phenix/phenix-web.service
-sudo systemctl disable /opt/minimega/miniweb.service
-sudo systemctl disable /opt/minimega/minimega.service
+sudo systemctl disable phenix-web.service
+sudo systemctl disable miniweb.service
+sudo systemctl disable minimega.service
 
 echo "Cleaning up existing installation in /opt"
 sudo rm -f /opt/build.tar.xz
@@ -23,8 +23,10 @@ sudo rm -rf $HOME/offline-node-modules
 sudo rm -rf $HOME/.gvm
 sudo rm -rf $HOME/.npm
 sudo rm -rf $HOME/.nvm
+sudo rm -rf /usr/lib/node_modules
 sudo rm -rf $HOME/.yarn
 sudo rm -rf $HOME/.cache/go-build
+sudo rm -rf /usr/local/go
 sudo rm -rf $HOME/.cache/yarn
 
 # Restore the .bashrc file
