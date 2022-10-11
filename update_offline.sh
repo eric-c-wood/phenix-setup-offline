@@ -88,6 +88,7 @@ source $HOME/.bashrc
 
 # Add redoc-cli to the path
 echo "export PATH=/opt/phenix/src/js/node_modules/.bin:$PATH" >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # Install yarn
 echo "Installing yarn"
