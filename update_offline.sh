@@ -86,6 +86,9 @@ echo "export PATH=$PATH:$HOME/.nvm/versions/node/v14.2.0/bin" >> $HOME/.bashrc
 echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
 source $HOME/.bashrc
 
+# Add redoc-cli to the path
+echo "export PATH=/opt/phenix/src/js/node_modules/.bin:$PATH" >> $HOME/.bashrc
+
 # Install yarn
 echo "Installing yarn"
 sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
