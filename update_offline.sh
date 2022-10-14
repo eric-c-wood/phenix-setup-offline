@@ -82,9 +82,8 @@ mkdir -p $HOME/.nvm/versions/node
 tar -xJf /opt/build/node-v14.2.0-linux-x64.tar.xz -C $HOME/.nvm/versions/node
 mv $HOME/.nvm/versions/node/node-v14.2.0-linux-x64 $HOME/.nvm/versions/node/v14.2.0
 chmod +x $HOME/.nvm/versions/node/v14.2.0/bin/*
-echo "export PATH=$PATH:$HOME/.nvm/versions/node/v14.2.0/bin" >> $HOME/.bashrc
+PATH=$HOME/.nvm/versions/node/v14.2.0/bin:$PATH
 echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
-source $HOME/.bashrc
 
 # Add redoc-cli to the path
 echo "export PATH=/opt/phenix/src/js/node_modules/.bin:$PATH" >> $HOME/.bashrc
