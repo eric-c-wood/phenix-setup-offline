@@ -35,6 +35,15 @@ rm -f $HOME/.bashrc
 sudo cp /etc/skel/.bashrc $HOME
 sudo chown $USER:$USER $HOME/.bashrc
 
+# Restore environment variables
+echo "Restoring environment variables"
+PATH=$(cat /etc/environment | sed 's|PATH=||g' | sed s'|["]||g')
+
+# GVM environment variables
+unset DYLD_LIBRARY_PATH
+unset LD_LIBRARY_PATH
+unset PKG_CONFIG_PATH
+
 echo "Extracting /opt/build.tar.xz to /opt"
 sudo cp build.tar.xz /opt
 sudo tar -xJf /opt/build.tar.xz -C /opt
