@@ -83,6 +83,9 @@ export PATH=$PATH:/usr/local/go/bin
 echo "Adding redoc-cli 0.13.8 to package.json"
 sed -i 's/"dependencies": {/& \n    "redoc-cli": "^0.13.8",/' /opt/build/phenix/src/js/package.json
 
+# Temporarily patch VUE_PATH_AUTH recursion/signin page error
+echo "VUE_PATH_AUTH=enabled" > /opt/build/phenix/src/js/.env.local
+
 # Build phenix which will acquire all the required libraries
 # for offline use
 sudo apt -y install make
