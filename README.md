@@ -10,7 +10,7 @@
 8) To test, copy all files from the DVD to $HOME on a clean Ubuntu 18.04 LTS
 installation.  
 9) Run `cd $HOME;source setup_offline.sh`
-10) When you see `Installing GVM`, disconnect from the Internet.  A connection to the Internet is initially needed to acquire all the packages from an online package repository.  After the packages are acquired, we disconnect from the Internet to prevent any package manager from trying to use the Internet to install a Javascript library if one can not be found locally.  Since the purpose of the test is to verify that installation will succeed when not connected to the Internet, disconnecting from the Internet helps to maitain the parameters of the test.
+10) When you see `Installing GVM`, disconnect from the Internet.  A connection to the Internet is initially needed to acquire all the packages from an online package repository.  After the packages are acquired, we disconnect from the Internet to prevent any package manager from trying to use the Internet to install a Javascript library if one can not be found locally.  Since the purpose of the test is to verify that installation will succeed when not connected to the Internet, disconnecting from the Internet helps to maintain the parameters of the test.
 
 ## phenix-offline update package notes
 1) To update from an existing installation, Run `cd $HOME;source update_offline.sh` for step 9.  If testing the `update_offline.sh` script, no connection to the Internet should be available and an existing installation of Phenix/Minimega should exist.
