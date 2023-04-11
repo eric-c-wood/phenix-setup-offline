@@ -110,7 +110,7 @@ yarn config set yarn-offline-mirror-pruning true
 
 # Install google proto buffers
 echo "Installing Google proto buffers"
-PROTOC_ZIP=protoc-3.7.1-linux-x86_64.zip
+PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
 sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local bin/protoc
 sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local 'include/*'
 
