@@ -73,6 +73,9 @@ echo "Installing Google proto buffers"
 PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
 sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local bin/protoc
 sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local 'include/*'
+sudo chmod 755 /usr/local/bin/protoc
+sudo chmod -R 755 /usr/local/include/google
+
 
 # Install go1.18 for Phenix to obtain libraries for offline use
 wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
@@ -84,7 +87,7 @@ echo "Adding redoc-cli 0.13.8 to package.json"
 sed -i 's/"dependencies": {/& \n    "redoc-cli": "^0.13.8",/' /opt/build/phenix/src/js/package.json
 
 # Temporarily patch VUE_PATH_AUTH recursion/signin page error
-echo "VUE_PATH_AUTH=enabled" > /opt/build/phenix/src/js/.env.local
+echo "VUE_APP_AUTH=enabled" > /opt/build/phenix/src/js/.env.local
 
 # Build phenix which will acquire all the required libraries
 # for offline use
