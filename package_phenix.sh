@@ -18,9 +18,9 @@ wget https://nodejs.org/download/release/v14.2.0/node-v14.2.0-linux-x64.tar.xz
 echo "Downloading yarn 1.22.17"
 wget https://github.com/yarnpkg/yarn/releases/download/v1.22.17/yarn_1.22.17_all.deb
 
-# Download Protobuf 3.7.1 
-echo "Downloading Protobuf 3.7.1"
-wget https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/protoc-3.7.1-linux-x86_64.zip
+# Download Protobuf 3.14.0 
+echo "Downloading Protobuf 3.14.0"
+wget https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/protoc-3.14.0-linux-x86_64.zip
 
 # install git
 echo "Installing git"
@@ -70,7 +70,7 @@ yarn config set yarn-offline-mirror-pruning true
 
 # Install google proto buffers
 echo "Installing Google proto buffers"
-PROTOC_ZIP=protoc-3.7.1-linux-x86_64.zip
+PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
 sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local bin/protoc
 sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local 'include/*'
 
