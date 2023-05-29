@@ -7,8 +7,12 @@ Wants=miniweb.service
 
 [Service]
 Type=simple
-Environment=PHENIX_STORE_ENDPOINT=bolt:///etc/phenix/store.bdb
-ExecStart=/opt/phenix/bin/phenix ui --log.error-stderr
+Environment="PHENIX_BASE_DIR_MINIMEGA=/tmp/minimega"
+Environment="PHENIX_STORE_ENDPOINT=bolt:///etc/phenix/store.bdb"
+ExecStart=/opt/phenix/bin/phenix ui \
+ --log.error-stderr \
+ --store.endpoint=${PHENIX_STORE_ENDPOINT} \
+ --base-dir.minimega=${PHENIX_BASE_DIR_MINIMEGA}
 
 [Install]
 WantedBy=multi-user.target
