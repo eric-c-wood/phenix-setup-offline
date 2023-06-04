@@ -7,8 +7,11 @@ PartOf=phenix-web.service
 [Service]
 Type=simple
 WorkingDirectory=/opt/minimega
-ExecStart=/opt/minimega/bin/miniweb -console /opt/minimega/bin/minimega
-
+Environment="MINIMEGA_BASE=/tmp/minimega"
+Environment="MINIMEGA_CONSOLE=/opt/minimega/bin/minimega"
+ExecStart=/opt/minimega/bin/miniweb \
+ -console=${MINIMEGA_CONSOLE} \
+ -base=${MINIMEGA_BASE}
 
 
 
