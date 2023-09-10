@@ -4,6 +4,7 @@ PartOf=phenix-web.service
 
 [Service]
 Type=simple
+LimitNOFILE=infinity
 Environment="MM_BASE=/tmp/minimega"
 Environment="MM_FILEPATH=/phenix/images"
 Environment="MM_BROADCAST=255.255.255.255"
