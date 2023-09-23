@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Ubuntu 18.04 LTS Phenix Offline Package Creation
+# Ubuntu 20.04 LTS Phenix Offline Package Creation
 # Make sure the system is in a clean state (i.e new OS install, or clear all caches 'yarn cache clean', 'npm cache clean', etc.)
 # Make sure the system date is correct
 sudo apt -y install ntpdate
@@ -10,9 +10,9 @@ sudo ntpdate time.nist.gov
 echo "Creating package directory"
 sudo mkdir -p /opt/build;sudo chown -R $USER:$USER /opt/build;cd /opt/build
 
-# Download Nodejs 14.2
-echo "Downloading Nodejs 14.2"
-wget https://nodejs.org/download/release/v14.2.0/node-v14.2.0-linux-x64.tar.xz
+# Download Nodejs 14.21.3
+echo "Downloading Nodejs 14.21.3"
+wget https://nodejs.org/download/release/v14.21.3/node-v14.21.3-linux-x64.tar.xz
 
 # Download yarn 1.22.17
 echo "Downloading yarn 1.22.17"
@@ -48,10 +48,11 @@ git clone https://github.com/sandia-minimega/minimega.git
 
 # Clone the phenix repository
 echo "Cloning phenix repository"
-git clone https://github.com/sandia-minimega/phenix.git
+git clone https://github.com/sandialabs/sceptre-phenix.git
+mv sceptre-phenix phenix
 
 ########### Setup yarn offline mirror ###############
-# Install nodejs 14.2
+# Install nodejs 14.21.3
 sudo apt -y install curl
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt -y install nodejs
@@ -77,9 +78,9 @@ sudo chmod 755 /usr/local/bin/protoc
 sudo chmod -R 755 /usr/local/include/google
 
 
-# Install go1.18 for Phenix to obtain libraries for offline use
-wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf /opt/build/go1.18.linux-amd64.tar.gz
+# Install go1.20.7 for Phenix to obtain libraries for offline use
+wget https://go.dev/dl/go1.20.7.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf /opt/build/go1.20.7.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
 # Add redoc-cli to package.json so yarn can manage
@@ -144,7 +145,7 @@ tar -cJv -f /opt/build/offline-node-modules.tar.xz -C $HOME offline-node-modules
 
 # Remove files that are no longer needed
 rm -rf /opt/build/phenix-setup-offline
-rm -f /opt/build/go1.18.linux-amd64.tar.gz
+rm -f /opt/build/go1.20.7.linux-amd64.tar.gz
 rm -rf /opt/build/phenix
 rm -rf /opt/build/minimega
 rm -rf /opt/build/go

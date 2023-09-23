@@ -66,13 +66,15 @@ gvm install go1.4 -B
 gvm use go1.4
 export GOROOT_BOOTSTRAP=$GOROOT
 
-#go 1.14 to build minimega, point to local go repository
-echo "Installing go 1.14"
-gvm install go1.14 -s=/opt/build/go
+#go 1.17.13 to build compile go 1.20.7
+echo "Installing go 1.17.13"
+gvm install go1.17.13 -s=/opt/build/go
+gvm use go1.17.13
+export GOROOT_BOOTSTRAP=$GOROOT
 
-#go 1.18 to build phenix, point to local go repository
-echo "Installing go 1.18"
-gvm install go1.18 -s=/opt/build/go
+#go 1.20.7 to build phenix, point to local go repository
+echo "Installing go 1.20.7"
+gvm install go1.20.7 -s=/opt/build/go
 
 # NVM Manager ( not required but makes dealing with npm easier)
 echo "Installing NVM"
@@ -84,14 +86,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Install nodejs 14.2
+# Install nodejs 14.21.3
 mkdir -p $HOME/.nvm/.cache/bin
-cp /opt/build/node-v14.2.0-linux-x64.tar.xz $HOME/.nvm/.cache/bin
+cp /opt/build/node-v14.21.3-linux-x64.tar.xz $HOME/.nvm/.cache/bin
 mkdir -p $HOME/.nvm/versions/node
-tar -xJf /opt/build/node-v14.2.0-linux-x64.tar.xz -C $HOME/.nvm/versions/node
-mv $HOME/.nvm/versions/node/node-v14.2.0-linux-x64 $HOME/.nvm/versions/node/v14.2.0
-chmod +x $HOME/.nvm/versions/node/v14.2.0/bin/*
-PATH=$HOME/.nvm/versions/node/v14.2.0/bin:$PATH
+tar -xJf /opt/build/node-v14.21.3-linux-x64.tar.xz -C $HOME/.nvm/versions/node
+mv $HOME/.nvm/versions/node/node-v14.21.3-linux-x64 $HOME/.nvm/versions/node/v14.21.3
+chmod +x $HOME/.nvm/versions/node/v14.21.3/bin/*
+PATH=$HOME/.nvm/versions/node/v14.21.3/bin:$PATH
 echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
 
 # Add redoc-cli to the path
@@ -127,7 +129,7 @@ sudo cp /opt/build/services/mini*.service /opt/minimega
 sudo chown -R $USER:$USER /opt/minimega
 sed -i s/MM_CONTEXT=minimega/MM_CONTEXT=$(hostname -s)/ /opt/minimega/minimega.service
 cd /opt/minimega/scripts;
-gvm use go1.14;
+gvm use go1.20.7;
 ./build.bash
 
 #setup phenix
@@ -138,7 +140,7 @@ sudo chown -R $USER:$USER /opt/phenix
 YARNRC=$(yarn config list --verbose | grep Found | grep yarn | grep -Po '["]([^"]+)["]' | head -n1 | sed s/\"//g)
 mv $YARNRC /opt/phenix/src/js
 cd /opt/phenix;
-gvm use go1.18;
+gvm use go1.20.7;
 make bin/phenix
 
 #setup ovs bridge
@@ -152,6 +154,3 @@ sudo systemctl enable /opt/minimega/minimega.service
 
 #start all the services
 sudo systemctl start phenix-web
-
-#navigate to host port 3000  
-firefox http://localhost:3000 &  
