@@ -80,7 +80,7 @@ sudo chmod -R 755 /usr/local/include/google
 
 # Install go1.21.5 for Phenix to obtain libraries for offline use
 wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf /opt/build/go1.20.7.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf /opt/build/go1.21.5.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
 # Add redoc-cli to package.json so yarn can manage
