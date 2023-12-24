@@ -78,8 +78,8 @@ sudo chmod 755 /usr/local/bin/protoc
 sudo chmod -R 755 /usr/local/include/google
 
 
-# Install go1.20.7 for Phenix to obtain libraries for offline use
-wget https://go.dev/dl/go1.20.7.linux-amd64.tar.gz
+# Install go1.21.5 for Phenix to obtain libraries for offline use
+wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf /opt/build/go1.20.7.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
@@ -145,7 +145,7 @@ tar -cJv -f /opt/build/offline-node-modules.tar.xz -C $HOME offline-node-modules
 
 # Remove files that are no longer needed
 rm -rf /opt/build/phenix-setup-offline
-rm -f /opt/build/go1.20.7.linux-amd64.tar.gz
+rm -f /opt/build/go1.21.5.linux-amd64.tar.gz
 rm -rf /opt/build/phenix
 rm -rf /opt/build/minimega
 rm -rf /opt/build/go

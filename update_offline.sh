@@ -66,15 +66,15 @@ gvm install go1.4 -B
 gvm use go1.4
 export GOROOT_BOOTSTRAP=$GOROOT
 
-#go 1.17.13 to build compile go 1.20.7
+#go 1.17.13 to build/compile go 1.21.5
 echo "Installing go 1.17.13"
 gvm install go1.17.13 -s=/opt/build/go
 gvm use go1.17.13
 export GOROOT_BOOTSTRAP=$GOROOT
 
-#go 1.20.7 to build phenix, point to local go repository
-echo "Installing go 1.20.7"
-gvm install go1.20.7 -s=/opt/build/go
+#go 1.21.5 to build phenix, point to local go repository
+echo "Installing go 1.21.5"
+gvm install go1.21.5 -s=/opt/build/go
 
 # NVM Manager ( not required but makes dealing with npm easier)
 echo "Installing NVM"
@@ -129,7 +129,7 @@ sudo cp /opt/build/services/mini*.service /opt/minimega
 sudo chown -R $USER:$USER /opt/minimega
 sed -i s/MM_CONTEXT=minimega/MM_CONTEXT=$(hostname -s)/ /opt/minimega/minimega.service
 cd /opt/minimega/scripts;
-gvm use go1.20.7;
+gvm use go1.21.5;
 ./build.bash
 
 #setup phenix
@@ -140,7 +140,7 @@ sudo chown -R $USER:$USER /opt/phenix
 YARNRC=$(yarn config list --verbose | grep Found | grep yarn | grep -Po '["]([^"]+)["]' | head -n1 | sed s/\"//g)
 mv $YARNRC /opt/phenix/src/js
 cd /opt/phenix;
-gvm use go1.20.7;
+gvm use go1.21.5;
 make bin/phenix
 
 #setup ovs bridge
