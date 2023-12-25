@@ -74,6 +74,10 @@ export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-115_binding.node
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
 yarn config set yarn-offline-mirror-pruning true
 
+# install unzip
+echo "Installing unzip"
+sudo apt -y install unzip
+
 # Install google proto buffers
 echo "Installing Google proto buffers"
 PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
@@ -94,7 +98,7 @@ sed -i 's/redoc-cli build/redocly build-docs/g' /opt/build/phenix/src/go/Makefil
 echo "VUE_APP_AUTH=enabled" > /opt/build/phenix/src/js/.env.local
 
 # Update the linter
-sed -i 's/parser: 'babel-eslint'/parser: '@babel/eslint-parser'/g' /opt/build/phenix/src/js/.eslintrc.js
+sed -i 's|babel-eslint|@babel/eslint-parser|g' /opt/build/phenix/src/js/.eslintrc.js
 
 # Turn off the linter for VUE since the errors are mostly ignored
 echo "**/*.vue" > /opt/build/phenix/src/js/.eslintignore
