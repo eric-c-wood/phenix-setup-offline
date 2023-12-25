@@ -2,7 +2,7 @@
 1) Install Ubuntu 20.04 LTS
 2) Change into the home directory on Ubuntu 20.04 LTS by running `cd $HOME`
 3) Install git `sudo apt -y install git`
-4) Clone this repository `git clone https://github.com/eric-c-wood/phenix-setup-offline.git`
+4) Clone this repository `git clone -b NodeJS20-Update https://github.com/eric-c-wood/phenix-setup-offline.git`
 5) Run `source $HOME/phenix-setup-offline/package_phenix.sh`
 6) After the package_phenix.sh script is finished running, there should be a 
 /opt/build.tar.xz compressed archive. (Note:**The script might take up to 15 minutes to run depending on downstream Internet connection speed and hard drive write speed**)
