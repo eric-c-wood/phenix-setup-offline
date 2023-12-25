@@ -46,15 +46,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Install nodejs 14.21.3
+# Install nodejs 20.10.0
 mkdir -p $HOME/.nvm/.cache/bin
-cp /opt/build/node-v14.21.3-linux-x64.tar.xz $HOME/.nvm/.cache/bin
+cp /opt/build/node-v20.10.0-linux-x64.tar.xz $HOME/.nvm/.cache/bin
 mkdir -p $HOME/.nvm/versions/node
-tar -xJf /opt/build/node-v14.21.3-linux-x64.tar.xz -C $HOME/.nvm/versions/node
-mv $HOME/.nvm/versions/node/node-v14.21.3-linux-x64 $HOME/.nvm/versions/node/v14.21.3
-chmod +x $HOME/.nvm/versions/node/v14.21.3/bin/*
-PATH=$HOME/.nvm/versions/node/v14.21.3/bin:$PATH
-echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node" >> $HOME/.bashrc
+tar -xJf /opt/build/node-v20.10.0-linux-x64.tar.xz -C $HOME/.nvm/versions/node
+mv $HOME/.nvm/versions/node/node-v20.10.0-linux-x64 $HOME/.nvm/versions/node/v20.10.0
+chmod +x $HOME/.nvm/versions/node/v20.10.0/bin/*
+PATH=$HOME/.nvm/versions/node/v20.10.0/bin:$PATH
+echo "export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-115_binding.node" >> $HOME/.bashrc
 
 # Add redoc-cli to the path
 echo "export PATH=/opt/phenix/src/js/node_modules/.bin:$PATH" >> $HOME/.bashrc
@@ -62,7 +62,7 @@ source $HOME/.bashrc
 
 # Install yarn
 echo "Installing yarn"
-sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
+sudo dpkg -i /opt/build/yarn_1.22.19_all.deb
 
 # Setup the offline mirror
 tar -xJf /opt/build/offline-node-modules.tar.xz -C $HOME/

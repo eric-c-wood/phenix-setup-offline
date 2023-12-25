@@ -10,13 +10,13 @@ sudo ntpdate time.nist.gov
 echo "Creating package directory"
 sudo mkdir -p /opt/build;sudo chown -R $USER:$USER /opt/build;cd /opt/build
 
-# Download Nodejs 14.21.3
-echo "Downloading Nodejs 14.21.3"
-wget https://nodejs.org/download/release/v14.21.3/node-v14.21.3-linux-x64.tar.xz
+# Download Nodejs 20.10.0
+echo "Downloading Nodejs 20.10.0"
+wget https://nodejs.org/download/release/v20.10.0/node-v20.10.0-linux-x64.tar.xz
 
-# Download yarn 1.22.17
-echo "Downloading yarn 1.22.17"
-wget https://github.com/yarnpkg/yarn/releases/download/v1.22.17/yarn_1.22.17_all.deb
+# Download yarn 1.22.19
+echo "Downloading yarn 1.22.19"
+wget https://github.com/yarnpkg/yarn/releases/download/v1.22.19/yarn_1.22.19_all.deb
 
 # Download Protobuf 3.14.0 
 echo "Downloading Protobuf 3.14.0"
@@ -52,18 +52,23 @@ git clone https://github.com/sandialabs/sceptre-phenix.git
 mv sceptre-phenix phenix
 
 ########### Setup yarn offline mirror ###############
-# Install nodejs 14.21.3
+# Install nodejs 20.10.0
 sudo apt -y install curl
-curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
-sudo apt -y install nodejs
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt-get update
+sudo apt-get install nodejs -y
 
 # Install yarn
 echo "Installing yarn"
-sudo dpkg -i /opt/build/yarn_1.22.17_all.deb
+sudo dpkg -i /opt/build/yarn_1.22.19_all.deb
 
 # Create the SASS_BINARY_PATH environment variable to download
 # the nodejs binding node
-export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-83_binding.node
+export SASS_BINARY_PATH=$HOME/offline-node-modules/linux-x64-115_binding.node
 
 # Point yarn to offline mirror
 yarn config set yarn-offline-mirror $HOME/offline-node-modules
@@ -77,18 +82,25 @@ sudo unzip -o /opt/build/$PROTOC_ZIP -d /usr/local 'include/*'
 sudo chmod 755 /usr/local/bin/protoc
 sudo chmod -R 755 /usr/local/include/google
 
-
 # Install go1.21.5 for Phenix to obtain libraries for offline use
 wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf /opt/build/go1.21.5.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
-# Add redoc-cli to package.json so yarn can manage
-echo "Adding redoc-cli 0.13.8 to package.json"
-sed -i 's/"dependencies": {/& \n    "redoc-cli": "^0.13.8",/' /opt/build/phenix/src/js/package.json
+# Modify the phenix/src/go for new version of redoc-cli 
+sed -i 's/redoc-cli build/redocly build-docs/g' /opt/build/phenix/src/go/Makefile
 
 # Temporarily patch VUE_PATH_AUTH recursion/signin page error
 echo "VUE_APP_AUTH=enabled" > /opt/build/phenix/src/js/.env.local
+
+# Update the linter
+sed -i 's/parser: 'babel-eslint'/parser: '@babel/eslint-parser'/g' /opt/build/phenix/src/js/.eslintrc.js
+
+# Turn off the linter for VUE since the errors are mostly ignored
+echo "**/*.vue" > /opt/build/phenix/src/js/.eslintignore
+
+# Get an updated package.json
+cp $HOME/phenix-setup-offline/package.json /opt/build/phenix/src/js
 
 # Build phenix which will acquire all the required libraries
 # for offline use
