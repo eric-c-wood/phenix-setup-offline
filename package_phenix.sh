@@ -145,7 +145,7 @@ tar -cJv -f /opt/build/phenix.tar.xz -C /opt/build phenix
 
 # Download the services 
 echo "Downloading the phenix and minimega services"
-git clone https://github.com/eric-c-wood/phenix-setup-offline.git
+git clone -b NodeJS20-Update https://github.com/eric-c-wood/phenix-setup-offline.git
 mkdir -p /opt/build/services
 cp /opt/build/phenix-setup-offline/*.service /opt/build/services
 
