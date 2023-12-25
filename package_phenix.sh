@@ -106,6 +106,9 @@ echo "**/*.vue" > /opt/build/phenix/src/js/.eslintignore
 # Get an updated package.json
 cp $HOME/phenix-setup-offline/package.json /opt/build/phenix/src/js
 
+# Needed as a temporary fix for the npx redocly/cli path issues
+ln -s /opt/build/phenix/src/js/node_modules /opt/build/phenix/node_modules
+
 # Build phenix which will acquire all the required libraries
 # for offline use
 sudo apt -y install make
@@ -145,7 +148,7 @@ tar -cJv -f /opt/build/phenix.tar.xz -C /opt/build phenix
 
 # Download the services 
 echo "Downloading the phenix and minimega services"
-git clone -b NodeJS20-Update https://github.com/eric-c-wood/phenix-setup-offline.git
+git clone https://github.com/eric-c-wood/phenix-setup-offline.git
 mkdir -p /opt/build/services
 cp /opt/build/phenix-setup-offline/*.service /opt/build/services
 
