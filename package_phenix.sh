@@ -115,10 +115,6 @@ sed -i 's|https://github.com/${NVM_GITHUB_REPO}.git|/opt/build/nvm|g' /opt/build
 echo "Creating the Golang archive"
 tar -cJv -f /opt/build/go.tar.xz -C /opt/build go
 
-# Add the option to include the localhost as a node
-sed -i s'/f_headnode.*/& \n\tf_localhost   = flag.Bool("localhost", false, "use local host as compute node")'/ /opt/build/minimega/cmd/minimega/main.go
-sed -i s'/if name == DefaultNamespace.*/\n\tif *f_localhost {\n\t\tns.Hosts[hostname] = true\n\t}\n\n\t&/' /opt/build/minimega/cmd/minimega/namespace.go
-
 # Create the minimega archive 
 echo "Creating the minimega archive"
 tar -cJv -f /opt/build/minimega.tar.xz -C /opt/build minimega

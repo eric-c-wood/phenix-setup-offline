@@ -15,7 +15,6 @@ Environment="MM_LOGLEVEL=info"
 Environment="MM_LOGFILE=/var/log/minimega.log"
 EnvironmentFile=-/etc/default/minimega
 ExecStart=/opt/minimega/bin/minimega \
-  -localhost \
   -force \
   -nostdin \
   -base=${MM_BASE} \
